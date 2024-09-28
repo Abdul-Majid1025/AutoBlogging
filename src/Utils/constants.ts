@@ -26,3 +26,5 @@ export const API: Record<string, string> = {
   GET_POSTS: `${BASE_URL}get-posts/`,
   PUBLISH_POSTS: `${BASE_URL}publish-posts/`,
 }
+
+export const PLACEHOLDER_IMG = 'https://i0.wp.com/theperfectroundgolf.com/wp-content/uploads/2022/04/placeholder.png?fit=1200%2C800&ssl=1'

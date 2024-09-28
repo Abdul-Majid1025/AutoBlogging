@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 import { Dropdown, MenuProps, Tag } from 'antd';
 import { boxShadow, maxTablet, primaryHeadingColor, wMBold } from '../Utils/utilsStyle';
 import { Report } from '../Types/KeywordTypes';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import ThreeDotSvg from 'SVG/ThreeDotSvg';
 import { useDispatch } from 'react-redux';
 import { actions } from 'Slice/KeywordSlice';
+import { PLACEHOLDER_IMG } from 'Utils/constants';
 
 const Wrapper = styled.div`
   height: 225px;
@@ -83,7 +84,8 @@ const ReportCard = function ReportCard(props: Props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { report } = props;
-  const img = report.reportImage || 'https://i0.wp.com/theperfectroundgolf.com/wp-content/uploads/2022/04/placeholder.png?fit=1200%2C800&ssl=1';
+  const img = report.reportImage || PLACEHOLDER_IMG;
+  const [srcImage, setSrcImage] = useState(img);
 
   const deleteReport = () => {
     dispatch(actions.deleteReport(report.reportId));
@@ -111,7 +113,12 @@ const ReportCard = function ReportCard(props: Props) {
     <Wrapper>
       <ImageWrapper className="d-flex flex-row" onClick={() => navigate(`/report?reportId=${report.reportId}`)}>
         <div className="heroImageWrap">
-          <ImageHero src={img} loading='lazy' alt="report-img" />
+          <ImageHero
+            src={srcImage}
+            loading='lazy'
+            alt="report-img"
+            onError={() => setSrcImage(PLACEHOLDER_IMG)}
+          />
         </div>
       </ImageWrapper>
       <TextWrapper>
