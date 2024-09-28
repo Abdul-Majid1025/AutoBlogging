@@ -72,6 +72,7 @@ const Paragraph = styled.p`
 const ImageHero = styled.img`
   height: 100%;
   width: 100%;
+  object-fit: cover; 
 `;
 
 type Props = {
